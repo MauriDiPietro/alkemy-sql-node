@@ -1,17 +1,15 @@
-import CustomError from "../utils/custom-error.js";
-import repositories from "../repositories/index.js";
-import { errorMessages } from "../utils/status-messages.js";
-import { courseServices } from "./course-services.js";
-const { studentRepository } = repositories;
+import { productRepository } from '../repositories/mongodb/product-repository.js'
+import CustomError from '../utils/custom-error.js';
+import { errorMessages } from '../utils/status-messages.js'
 
-class StudentServices {
+class ProductServices {
   constructor(repository) {
     this.repository = repository;
   }
 
   getById = async (id) => {
     try {
-      const response = await this.repository.getStudentById(id);
+      const response = await this.repository.getById(id);
       if (!response) throw new CustomError(errorMessages.NOT_FOUND, 404);
       return response;
     } catch (error) {
@@ -21,7 +19,7 @@ class StudentServices {
 
   getAll = async () => {
     try {
-      return await this.repository.getAllStudents();
+      return await this.repository.getAll();
     } catch (error) {
       throw new Error(error);
     }
@@ -56,19 +54,6 @@ class StudentServices {
       throw error;
     }
   };
-
-  addCourseToStudent = async (idStudent, idCourse) => {
-    try {
-      const student = await this.getById(idStudent);
-    //   console.log(student)
-      const course = await courseServices.getById(idCourse);
-      const response = await student.addCoursesOfStudent([course]);
-      if (!response) throw new CustomError(errorMessages.ERROR_CREATE, 400);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
 }
 
-export const studentServices = new StudentServices(studentRepository);
+export const productServices = new ProductServices(productRepository);
