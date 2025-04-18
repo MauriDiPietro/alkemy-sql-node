@@ -16,6 +16,9 @@ class StudentRepository extends MySqlRepository {
           {
             model: CourseModel,
             as: "coursesOfStudent",
+            attributes: ["title", "description"],
+            through: { attributes: [] },
+            required: true
           },
         ],
       });
@@ -24,11 +27,11 @@ class StudentRepository extends MySqlRepository {
     }
   };
 
-  getAllStudents = async () => {
+  getAllStudents = async (orderLastName = 'ASC') => {
     try {
       return await this.model.findAll({
         attributes: ["firstName", "lastName"],
-        order: [["lastName", "ASC"]],
+        order: [["lastName", `${orderLastName}`]],
         include: [
           {
             model: CourseModel,
