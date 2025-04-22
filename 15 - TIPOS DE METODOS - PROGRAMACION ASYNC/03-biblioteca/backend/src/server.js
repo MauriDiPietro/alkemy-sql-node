@@ -2,11 +2,14 @@ import express from "express";
 import bookRouter from "./routes/book-router.js";
 import { errorHandler } from "./middlewares/error-handler.js";
 import { initMySqlDB } from "./config/db-connection.js";
+import cors from 'cors'
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST', 'PUT', 'DELETE'] }))
 
 app.use("/books", bookRouter);
 
