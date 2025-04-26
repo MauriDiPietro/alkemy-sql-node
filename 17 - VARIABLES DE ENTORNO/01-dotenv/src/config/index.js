@@ -4,7 +4,7 @@ const ENV = "PROD";
 
 dotenv.config(
     {
-        path: ENV === "PROD" ? "../.env.prd" : ENV === "QAS" ? "../.env.qas" : "../.env.dev"
+        path: ENV === "PROD" ? "./.env.prd" : ENV === "QAS" ? "./.env.qas" : "./.env.dev"
     }
 );
 
