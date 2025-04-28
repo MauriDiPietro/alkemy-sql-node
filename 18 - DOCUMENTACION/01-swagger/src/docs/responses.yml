@@ -1,0 +1,51 @@
+components:
+  schema:
+    Books:
+      Book:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: ID del libro
+            example: 1
+          title:
+            type: string
+            description: Título del libro
+            example: The Great Gatsby
+          author:
+            type: string
+            description: Autor del libro
+            example: F. Scott Fitzgerald
+          description:
+            type: string
+            description: Descripción del libro
+            example: A novel set in the 1920s that tells the story of Jay Gatsby and his unrequited love for Daisy Buchanan.
+          image:
+            type: string
+            description: URL de la imagen del libro
+            example: https://example.com/image.jpg
+      GetAllBooks:
+        type: array
+        items:
+          $ref: "#/components/schema/Books/Book"
+      NotFound:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Mensaje de error
+            example: El resurso no se encontró.
+      ErrorGetById:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Mensaje de error
+            example: Error al obtener el recurso con ID x.
+      ErrorPost:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Mensaje de error
+            example: Error al crear el recurso.

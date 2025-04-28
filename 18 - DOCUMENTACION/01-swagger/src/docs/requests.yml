@@ -1,0 +1,26 @@
+components: 
+  parameters:
+    schemas:
+      BodyPost: 
+        type: object
+        required:
+          - title
+          - author
+          - description
+        properties:
+          title:
+            type: string
+            description: Título del libro
+            example: The Great Gatsby
+          author:
+            type: string
+            description: Autor del libro
+            example: F. Scott Fitzgerald
+          description:
+            type: string
+            description: Descripción del libro
+            example: A novel set in the 1920s that tells the story of Jay Gatsby and his unrequited love for Daisy Buchanan.
+          image:
+            type: string
+            description: URL de la imagen del libro
+            example: https://example.com/image.jpg
