@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Strategy, ExtractJwt } from "passport-jwt";
-import { userService } from "../services/user-service.js";
 import config from "../config/index.js";
 
 const verifyToken = async (jwt_payload, done) => {
@@ -20,20 +19,3 @@ const strategyCookiesConfig = {
 };
 
 passport.use("jwt", new Strategy(strategyCookiesConfig, verifyToken));
-
-passport.serializeUser((user, done) => {
-  try {
-    done(null, user.email);
-  } catch (error) {
-    done(error);
-  }
-});
-
-passport.deserializeUser(async (email, done) => {
-  try {
-    const user = await userService.getByEmail(email);
-    return done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});

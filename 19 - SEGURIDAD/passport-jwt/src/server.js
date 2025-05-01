@@ -1,6 +1,5 @@
 import express from "express";
 import passport from "passport";
-import session from 'express-session'
 import cookieParser from "cookie-parser";
 import { initMySQLDB } from "./config/db-connection.js";
 import config from "./config/index.js";
@@ -12,8 +11,6 @@ const app = express();
 
 app.use(cookieParser());
 app.use(passport.initialize())
-app.use(passport.session())
-app.use(session())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

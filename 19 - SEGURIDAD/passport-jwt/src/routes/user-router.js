@@ -2,7 +2,7 @@ import { Router } from "express";
 import { userController } from "../controllers/user-controller.js";
 import { checkRole } from "../middlewares/check-role.js";
 import { ROLES } from "../utils/role-enum.js";
-import { passportCall } from "../middlewares/passport-call.js";
+import passport from "passport";
 
 const router = Router();
 
@@ -10,22 +10,21 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get(
   "/profile-user",
-  // passport.authenticate('jwt')
-  passportCall('jwt'),
+  passport.authenticate('jwt', { session: false }),
   checkRole([ROLES.USUARIO]),
   userController.getInfoUser
 );
 
 router.get(
     "/profile-admin",
-    passportCall('jwt'),
+    passport.authenticate('jwt', { session: false }),
     checkRole([ROLES.ADMIN]),
     userController.getInfoUser
   );
 
   router.get(
     "/test",
-    passportCall('jwt'),
+    passport.authenticate('jwt', { session: false }),
     checkRole([ROLES.ADMIN, ROLES.USUARIO, ROLES.INVITADO]),
     (req,res)=>res.send('ok')
   );
